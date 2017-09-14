@@ -1,0 +1,9 @@
+{
+  "name": "@ovos-media/simple-promise-queue",
+  "version": "1.0.0",
+  "description": "A simple promise queue helper with concurrency settings.",
+  "main": "index.js",
+  "repository": "https://github.com/ovos/js-helpers",
+  "author": "Patrick Hübl-Neschkudla <pn@ovos.at>, Maciej Holyszko <mho@ovos.at>",
+  "license": "MIT"
+}
