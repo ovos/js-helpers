@@ -1,3 +1,5 @@
+[![npm (scoped)](https://img.shields.io/npm/v/@ovos-media/simple-promise-queue.svg)]()
+[![Travis branch](https://img.shields.io/travis/ovos/js-helpers/master.svg)]()
 # simple-promise-queue
 
 easily make your async functions queuable!
