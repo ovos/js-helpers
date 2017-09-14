@@ -1,6 +1,7 @@
-function createQueue(fn, concurrency = 1) {
+function createQueue(fn, options = { concurrency: 1 }) {
   let active = 0;
   const queue = [];
+  const { concurrency } = options;
 
   async function exec(...params) {
     active++;
@@ -31,14 +32,17 @@ function createQueue(fn, concurrency = 1) {
   };
 }
 
-function handleDescriptor(target, name, descriptor, options = []) {
+function handleDescriptor(target, name, descriptor, ...options) {
+  if (typeof descriptor === 'undefined') {
+    throw new SyntaxError('queuable decorator can\'t be used with parameters. Wrap your function instead.');
+  }
+
   const fn = descriptor.value;
   if (typeof fn !== 'function') {
     throw new SyntaxError('Only functions can be made queueable');
   }
 
-  const [{ concurrency = 1 } = {}] = options;
-  const queue = createQueue(fn, concurrency);
+  const queue = createQueue(fn, ...options);
 
   return {
     ...descriptor,

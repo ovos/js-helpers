@@ -9,10 +9,6 @@ var _extends2 = require('babel-runtime/helpers/extends');
 
 var _extends3 = _interopRequireDefault(_extends2);
 
-var _slicedToArray2 = require('babel-runtime/helpers/slicedToArray');
-
-var _slicedToArray3 = _interopRequireDefault(_slicedToArray2);
-
 var _promise = require('babel-runtime/core-js/promise');
 
 var _promise2 = _interopRequireDefault(_promise);
@@ -71,10 +67,12 @@ function createQueue(fn) {
     };
   }();
 
-  var concurrency = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 1;
+  var options = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : { concurrency: 1 };
 
   var active = 0;
   var queue = [];
+  var concurrency = options.concurrency;
+
 
   return function handleCall() {
     for (var _len2 = arguments.length, params = Array(_len2), _key2 = 0; _key2 < _len2; _key2++) {
@@ -95,21 +93,23 @@ function createQueue(fn) {
 }
 
 function handleDescriptor(target, name, descriptor) {
-  var options = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : [];
+  for (var _len3 = arguments.length, options = Array(_len3 > 3 ? _len3 - 3 : 0), _key3 = 3; _key3 < _len3; _key3++) {
+    options[_key3 - 3] = arguments[_key3];
+  }
+
+  if (typeof descriptor === 'undefined') {
+    console.log(arguments);
+    return function (target) {
+      console.log("IN", target);
+    };
+  }
 
   var fn = descriptor.value;
   if (typeof fn !== 'function') {
     throw new SyntaxError('Only functions can be made queueable');
   }
 
-  var _options = (0, _slicedToArray3.default)(options, 1),
-      _options$ = _options[0];
-
-  _options$ = _options$ === undefined ? {} : _options$;
-  var _options$$concurrency = _options$.concurrency,
-      concurrency = _options$$concurrency === undefined ? 1 : _options$$concurrency;
-
-  var queue = createQueue(fn, concurrency);
+  var queue = createQueue.apply(undefined, [fn].concat(options));
 
   return (0, _extends3.default)({}, descriptor, {
     value: queue
@@ -117,8 +117,8 @@ function handleDescriptor(target, name, descriptor) {
 }
 
 function queueable() {
-  for (var _len3 = arguments.length, args = Array(_len3), _key3 = 0; _key3 < _len3; _key3++) {
-    args[_key3] = arguments[_key3];
+  for (var _len4 = arguments.length, args = Array(_len4), _key4 = 0; _key4 < _len4; _key4++) {
+    args[_key4] = arguments[_key4];
   }
 
   if (typeof args[0] === 'function') {
