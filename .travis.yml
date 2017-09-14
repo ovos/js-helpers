@@ -8,7 +8,7 @@ node_js:
   - "7.0"
   - "8.0"
 install:
-  - cd simple-promise-queue && npm i
+  - cd ${TRAVIS_BUILD_DIR}/simple-promise-queue && npm i
 
 script:
-  - cd simple-promise-queue && npm run test
+  - cd ${TRAVIS_BUILD_DIR}/simple-promise-queue && npm run test
