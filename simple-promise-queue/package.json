@@ -1,6 +1,6 @@
 {
   "name": "@ovos-media/simple-promise-queue",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "A simple promise queue helper with concurrency settings.",
   "main": "dist/index.js",
   "repository": "https://github.com/ovos/js-helpers",
