@@ -12,7 +12,7 @@ const queueableAsyncFunction = queuable(
 );
 
 // or as a decorator!
-@queuable({ concurrency: 1 }) async function() {
+@queuable async function() {
   return request(...);
 }
 ```
