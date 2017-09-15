@@ -2,19 +2,19 @@
 [![Travis branch](https://img.shields.io/travis/ovos/js-helpers/master.svg)](https://travis-ci.org/ovos/js-helpers)
 # simple-promise-queue
 
-easily make your async functions queuable!
+easily make your async functions queueable!
 
 ```js
-import queuable from '@ovos-media/simple-promise-queue';
+import queueable from '@ovos-media/simple-promise-queue';
 
 // just wrap your function to control execution sequence!
-const queueableAsyncFunction = queuable(
+const queueableAsyncFunction = queueable(
   asyncFunction, 
   { concurrency: 1 }
 );
 
 // or as a decorator!
-@queuable async function() {
+@queueable async function() {
   return request(...);
 }
 ```

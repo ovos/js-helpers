@@ -34,7 +34,7 @@ function createQueue(fn, options = { concurrency: 1 }) {
 
 function handleDescriptor(target, name, descriptor, ...options) {
   if (typeof descriptor === 'undefined') {
-    throw new SyntaxError('queuable decorator can\'t be used with parameters. Wrap your function instead.');
+    throw new SyntaxError('queueable decorator can\'t be used with parameters. Wrap your function instead.');
   }
 
   const fn = descriptor.value;

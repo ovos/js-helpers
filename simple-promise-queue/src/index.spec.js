@@ -1,4 +1,4 @@
-import queuable from './index';
+import queueable from './index';
 
 function timeout(ms) {
   return new Promise(resolve => setTimeout(resolve, ms));
@@ -29,7 +29,7 @@ const doSth = async () => {
 }
 
 test('returns a function', async () => {  
-  const qadd = queuable(add);
+  const qadd = queueable(add);
   expect(typeof qadd).toBe('function');
 });
 
@@ -39,7 +39,7 @@ test('queues execution of promises', async () => {
   promises = [];
   target = [];
 
-  const qDoSth = queuable(doSth);
+  const qDoSth = queueable(doSth);
 
   for (let i = 0; i < 10; i++) {
     promises.push(qDoSth());
@@ -60,7 +60,7 @@ test('handles concurrency of promises', async () => {
   promises = [];
   target = [];
 
-  const qDoSth = queuable(doSth, {  concurrency: 5 });
+  const qDoSth = queueable(doSth, {  concurrency: 5 });
 
   for (let i = 0; i < 10; i++) {
     promises.push(qDoSth());
@@ -86,7 +86,7 @@ test('can be used as decorator', async () => {
   target = [];
 
   class Demo {
-    @queuable
+    @queueable
     async d(...params) {
       return doSth(...params);
     }
@@ -110,7 +110,7 @@ test('can be used as decorator', async () => {
 test('throws when decorator is used with options', async () => {
   expect(() => {
     class Demo {
-      @queuable(5)
+      @queueable(5)
       async d(...params) {
         return doSth(...params);
       }
