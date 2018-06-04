@@ -1,7 +1,8 @@
 function createQueue(fn, options = { concurrency: 1 }) {
   let active = 0;
-  const queue = [];
-  const { concurrency } = options;
+  let queue = [];
+
+  const { concurrency } = options;
 
   async function exec(...params) {
     active++;
@@ -18,7 +19,7 @@ function createQueue(fn, options = { concurrency: 1 }) {
     return res;
   }
 
-  return function handleCall(...params) {
+  function handleCall(...params) {
     if (active < concurrency) {
       return exec.apply(this, params);
     }
@@ -30,6 +31,13 @@ function createQueue(fn, options = { concurrency: 1 }) {
       });
     });
   };
+
+  handleCall.stop = function () {
+    active = 0;
+    queue = [];
+  }
+
+  return handleCall;
 }
 
 function handleDescriptor(target, name, descriptor, ...options) {
