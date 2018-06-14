@@ -32,9 +32,13 @@ function createQueue(fn, options = { concurrency: 1 }) {
     });
   };
 
-  handleCall.stop = function () {
-    active = 0;
-    queue = [];
+  handleCall.stop = function (ids = null) {
+    if (ids) {
+      queue = queue.filter(item => ids.findIndex(id => id !== item.params[0].id) > -1);  // use the ids param for filtering the queue
+    } else {
+      active = 0;
+      queue = [];  // remove all items in the queue
+    }
   }
 
   return handleCall;
