@@ -1,8 +1,8 @@
-function createQueue(fn, options = { concurrency: 1 }) {
+function createQueue(fn, options = { concurrency: 1, unshift: false }) {
   let active = 0;
   let queue = [];
 
-  const { concurrency } = options;
+  const { concurrency, unshift } = options;
 
   async function exec(...params) {
     active++;
@@ -24,11 +24,19 @@ function createQueue(fn, options = { concurrency: 1 }) {
       return exec.apply(this, params);
     }
     return new Promise((resolve, reject) => {
-      queue.push({
-        resolve,
-        reject,
-        params
-      });
+      if (unshift) {
+        queue.unshift({
+          resolve,
+          reject,
+          params
+        });
+      } else {
+        queue.push({
+          resolve,
+          reject,
+          params
+        });
+      }
     });
   };
 
