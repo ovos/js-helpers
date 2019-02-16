@@ -21,7 +21,7 @@ const queueableAsyncFunction = queueable(
 
 ## Maintainers
 
-[@flipace](https://github.com/flipace), [@mh-ovos](https://github.com/mh-ovos)
+[@flipace](https://github.com/flipace), [@unhawkable](https://github.com/unhawkable)
 
 ovos media gmbh, [@ovos](https://github.com/ovos), [Visit us!](https://ovos.at)
 

@@ -1,0 +1,15 @@
+{
+  "jsc": {
+    "parser": {
+      "syntax": "ecmascript",
+      "jsx": false,
+      "numericSeparator": false,
+      "classPrivateProperty": false,
+      "privateMethod": false,
+      "classProperty": false,
+      "functionBind": true,
+      "decorators": true,
+      "decoratorsBeforeExport": false
+    }
+  }
+}
