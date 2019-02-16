@@ -1,0 +1,15 @@
+{
+	"plugins": [
+		"@babel/plugin-transform-regenerator",
+		["@babel/plugin-proposal-decorators", {
+			"decoratorsBeforeExport": true
+		}]
+	],
+  "presets": [
+  	["@babel/preset-env", {
+  		"targets": {
+  			"node": "8"
+  		}
+  	}]
+  ]
+}
