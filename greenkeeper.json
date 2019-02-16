@@ -1,0 +1,9 @@
+{
+  "groups": {
+    "default": {
+      "packages": [
+        "simple-promise-queue/package.json"
+      ]
+    }
+  }
+}
