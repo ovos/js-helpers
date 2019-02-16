@@ -24,7 +24,7 @@
     "jest": "^24.1.0"
   },
   "scripts": {
-    "prepublish": "babel src -d dist",
+    "prepublish": "babel src -d dist --ignore \"src/**/*.spec.js\"",
     "test": "jest src"
   },
   "dependencies": {

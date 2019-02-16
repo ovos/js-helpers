@@ -5,8 +5,5 @@
 			"decoratorsBeforeExport": true
 		}]
 	],
-  "presets": ["@babel/preset-env"],
-  "ignore": [
-    "**/*.spec.js"
-  ]
+  "presets": ["@babel/preset-env"]
 }
