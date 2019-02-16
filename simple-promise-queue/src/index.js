@@ -1,3 +1,5 @@
+import regeneratorRuntime from "regenerator-runtime/runtime";
+
 function createQueue(fn, options = { concurrency: 1, unshift: false }) {
   let active = 0;
   let queue = [];
@@ -52,12 +54,12 @@ function createQueue(fn, options = { concurrency: 1, unshift: false }) {
   return handleCall;
 }
 
-function handleDescriptor(target, name, descriptor, ...options) {
-  if (typeof descriptor === 'undefined') {
-    throw new SyntaxError('queueable decorator can\'t be used with parameters. Wrap your function instead.');
+function handleDescriptor(decorator, ...options) {
+  if (typeof decorator !== 'object') {
+    throw new SyntaxError('invalid descriptor received');
   }
 
-  const fn = descriptor.value;
+  const fn = decorator.descriptor.value;
   if (typeof fn !== 'function') {
     throw new SyntaxError('Only functions can be made queueable');
   }
@@ -65,16 +67,17 @@ function handleDescriptor(target, name, descriptor, ...options) {
   const queue = createQueue(fn, ...options);
 
   return {
-    ...descriptor,
+    ...decorator,
     value: queue
   };
 }
 
-export default function queueable(...args) {
-  if (typeof args[0] === 'function') {
-    return createQueue.apply(this, args);
+export default function queueable(arg, opts) {
+  if (typeof arg === 'function') {
+    return createQueue.apply(this, [arg, opts]);
   }
-  return handleDescriptor(...args);
+
+  return handleDescriptor(arg);
 }
 
 export {

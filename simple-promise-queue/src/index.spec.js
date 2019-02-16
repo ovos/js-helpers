@@ -1,3 +1,5 @@
+import regeneratorRuntime from "regenerator-runtime/runtime";
+
 import queueable from './index';
 
 function timeout(ms) {
