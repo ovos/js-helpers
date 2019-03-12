@@ -130,7 +130,7 @@ test('continues queue even when errors are thrown', async () => {
     throw new Error(1);
   }
 
-  const queuedThrower = queuable(illThrow, { concurrency: 1 });
+  const queuedThrower = queueable(illThrow, { concurrency: 1 });
 
   const amount = 3;
 
