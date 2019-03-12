@@ -121,3 +121,26 @@ test('throws when decorator is used with options', async () => {
     const d = new Demo();
   }).toThrow();
 })
+
+test('continues queue even when errors are thrown', async () => {
+  let counter = 0;
+
+  function illThrow() {
+    counter += 1;
+    throw new Error(1);
+  }
+
+  const queuedThrower = queuable(illThrow, { concurrency: 1 });
+
+  const amount = 3;
+
+  for (let i = 0; i < amount; i++) {
+    try {
+      await queuedThrower();
+    } catch (err) {
+      expect(err).toBeInstanceOf(Error);
+    }
+  }
+
+  expect(counter).toBe(amount);
+})

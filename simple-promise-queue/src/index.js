@@ -8,7 +8,17 @@ function createQueue(fn, options = { concurrency: 1, unshift: false }) {
 
   async function exec(...params) {
     active++;
-    const res = await fn.apply(this, params);
+    let res;
+    let isError = false;
+
+    try {
+      res = await fn.apply(this, params);
+    } catch (err) {
+      // we catch and save the error
+      // this allows us to throw it after we continued execution of our queue
+      isError = err;
+    }
+
     active--;
 
     if (queue.length && active < concurrency) {
@@ -16,6 +26,10 @@ function createQueue(fn, options = { concurrency: 1, unshift: false }) {
       exec.apply(this, next.params)
         .then(next.resolve)
         .catch(next.reject);
+    }
+
+    if (isError) {
+      throw isError;
     }
 
     return res;
