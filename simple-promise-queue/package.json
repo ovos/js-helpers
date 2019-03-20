@@ -28,6 +28,6 @@
     "test": "jest src"
   },
   "dependencies": {
-    "regenerator-runtime": "^0.13.1"
+    "regenerator-runtime": "^0.13.2"
   }
 }
