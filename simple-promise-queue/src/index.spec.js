@@ -63,12 +63,12 @@ test('handles concurrency of promises', async () => {
   target = [];
 
   const qDoSth = queueable(doSth, {  concurrency: 5 });
+  const t = Date.now();
 
   for (let i = 0; i < 10; i++) {
     promises.push(qDoSth());
   }
 
-  const t = Date.now();
   await Promise.all(promises);
   const duration = Date.now() - t;
 
