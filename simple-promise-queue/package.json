@@ -21,7 +21,7 @@
     "@babel/plugin-proposal-decorators": "^7.3.0",
     "@babel/plugin-transform-regenerator": "^7.0.0",
     "@babel/preset-env": "^7.3.1",
-    "jest": "^25.4.0"
+    "jest": "^26.3.0"
   },
   "scripts": {
     "prepublish": "babel src -d dist --ignore \"src/**/*.spec.js\"",
