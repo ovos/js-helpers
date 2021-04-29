@@ -1,6 +1,0 @@
-# see https://dependabot.com/docs/config-file/
-version: 1
-update_configs:
-  - directory: "/simple-promise-queue"
-    package_manager: "javascript"
-    update_schedule: "daily"
